@@ -1,0 +1,45 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: my_rabbit_app
+    ports:
+      - "9000:9000"
+    environment:
+      - ENV=dev
+      - PORT=9000
+      - HOST=localhost
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=123
+      - DB_DATABASE=products
+      - DB_HOST=db
+      - DB_DIALECT=postgres
+      - DB_PORT=5432
+      - MSG_BROKER_URL=amqp://roboto:123@rabbitmq:5672/
+    networks:
+      - proxynet
+    depends_on:
+      - redis
+      - rabbitmq
+
+  redis:
+    image: redis:latest
+    container_name: my_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - proxynet
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: my_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - proxynet
+
+networks:
+  proxynet:

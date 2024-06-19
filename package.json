@@ -1,0 +1,41 @@
+{
+  "name": "product_api",
+  "version": "1.0.0",
+  "description": "RabbitMQ API",
+  "scripts": {
+    "up": "db-migrate up --env pg",
+    "down": "db-migrate down --env pg",
+    "start": "db-migrate up && ts-node src/app.ts",
+    "watch": "nodemon -e ts  --exec npm start",
+    "clear-redis": "redis-cli FLUSHALL",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "Asqarov Abdulhafiz",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "db-migrate-pg": "^1.5.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "express-joi-validation": "^5.0.1",
+    "http-status-codes": "^1.4.0",
+    "joi": "^17.12.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.3",
+    "redis": "^3.1.2",
+    "swagger-ui-express": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2",
+    "util": "^0.12.5",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.28",
+    "@types/redis": "^4.0.11",
+    "nodemon": "^3.1.0"
+  }
+}
