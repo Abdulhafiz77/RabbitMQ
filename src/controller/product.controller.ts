@@ -70,7 +70,7 @@ export class ProductController {
             let checkName = await ProductRepository.getByName(req.body.name);
             if (checkName && checkName.id != req.body.id) return ErrorService.error(res, ErrorEnum.nameUsed, CONFLICT);
 
-            let data = await ProductRepository.update(req.body);
+            let data = await ProductRepository.update(req.body); 
 
             return res.send(data);
         } catch (error) {
