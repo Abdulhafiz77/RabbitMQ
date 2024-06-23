@@ -17,7 +17,7 @@ export const getPaginationResponse = function <T>(data: T[], page: number, limit
 
 export const buildPagination = function <T extends BaseModel>(data: T[], page: number = 1, limit: number = 12): PaginationResponse<T> {
     if (isNaN(page)) page = 1;
-    if (isNaN(limit)) limit = 12;
+    if (isNaN(limit)) limit = 10;
 
     let responseBody: any = {
         items: data,
