@@ -48,9 +48,10 @@ export class ProductController {
 
     static async create(req: ValidatedRequest<ValidatedRequestBody<ProductModel>>, res) {
         try {
+            console.log(req.body)
             let checkName = await ProductRepository.getByName(req.body.name);
             if (checkName) return ErrorService.error(res, ErrorEnum.nameUsed, CONFLICT);
-
+            console.log(req.body)
             const data = await ProductRepository.create(req.body)
 
             return res.send(data);

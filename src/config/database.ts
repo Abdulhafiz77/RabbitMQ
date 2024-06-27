@@ -1,14 +1,16 @@
 import { Pool } from 'pg';
-import config from './config';
+import * as dotenv from 'dotenv';
+dotenv.config();
+const pool = new Pool({
+  database: process.env.DB_DATABASE,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  max: 9999,
+  idleTimeoutMillis: 30000
+});
 
-const pool = new Pool(config.db);
-
-export const pgPoolQuery = async (sql: string, params?: any): Promise<any> => {
-  try {
-    const result = await pool.query(sql, params);
-    return result; 
-  } catch (error) {
-    console.error('Database query error:', error);
-    throw error;
-  }
+export const pgPoolQuery = (sql: string, params?: any) => {
+  return pool.query(sql, params);
 };
